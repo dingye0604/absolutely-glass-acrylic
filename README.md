@@ -2,73 +2,58 @@
 
 **English** | [中文](./README.zh-CN.md)
 
-An optional companion plugin for the [AbsolutelyGlass](https://github.com/dingye0604/AbsolutelyGlass) Obsidian theme. It asks Electron for a native Windows Acrylic backdrop so your real desktop shows through the window, instead of the theme's simulated CSS glass.
+Makes the [AbsolutelyGlass](https://github.com/dingye0604/AbsolutelyGlass) theme show your real desktop through the window, using Windows 11's built-in Acrylic material — the same frosted effect you see behind the Start menu.
 
-Without this plugin the theme still works everywhere — it just draws its own frosted panels over its own background. This plugin is what makes the desktop itself the backdrop.
+The theme on its own blurs its own background. This plugin swaps that for the actual desktop sitting behind your window.
 
-## Requirements
+## Before you install
 
-- **Windows 11 22H2 (build 22621) or newer.** The plugin checks the OS build and stays inactive on anything older.
-- **Obsidian 1.5.0 or newer**, installed with an Electron runtime that exposes `BrowserWindow.setBackgroundMaterial`. If your installer predates that API, the plugin tells you and does nothing.
-- **The AbsolutelyGlass theme**, enabled. The plugin looks for the theme's marker variable and disables itself when the theme is not active.
+- **Windows 11 22H2 (build 22621) or newer.** On anything older the plugin quietly does nothing.
+- **The AbsolutelyGlass theme, enabled.** The plugin only acts while that theme is active.
+- **Obsidian 1.5.0 or newer**, installed with a recent Electron runtime.
 
-Desktop only. The plugin is `isDesktopOnly`, and it does nothing on macOS, Linux, or mobile.
+Desktop only — it does nothing on macOS, Linux or mobile.
 
-## Installation
+## Install
 
-### From the community plugin browser
+**From Obsidian** — Settings → Community plugins → Browse, search for **AbsolutelyGlass Acrylic**, then Install and Enable.
 
-1. **Settings → Community plugins → Browse**
-2. Search for **AbsolutelyGlass Acrylic**
-3. **Install**, then **Enable**
+**By hand** — download `main.js` and `manifest.json` from the [latest release](https://github.com/dingye0604/absolutely-glass-acrylic/releases/latest), put both in `<your-vault>/.obsidian/plugins/absolutely-glass-acrylic/`, reload Obsidian, and enable it under Settings → Community plugins.
 
-### Manually
-
-1. Download `main.js` and `manifest.json` from the [latest release](https://github.com/dingye0604/absolutely-glass-acrylic/releases/latest)
-2. Create a folder named `absolutely-glass-acrylic` inside `<your-vault>/.obsidian/plugins/`
-3. Put both files in that folder
-4. Reload Obsidian, then enable **AbsolutelyGlass Acrylic** in **Settings → Community plugins**
-
-Nothing to configure. The plugin finds the theme on its own.
+There is nothing to configure. The plugin finds the theme on its own.
 
 ## What it does
 
-It sets two properties on the current window — a fully transparent background color and the `acrylic` material — then adds a `ca-native-glass` class to the document body. The theme responds to that class by making its own surfaces transparent, so the native material is what you see.
+It makes one window's background transparent and asks Windows for the Acrylic material. Switch to another theme, turn on the theme's solid mode, or turn transparency off in Windows accessibility settings, and it puts everything back exactly as it was.
 
-It reverses all of that when you switch away from the theme, switch on the theme's solid mode, turn on reduced-transparency accessibility settings, or unload the plugin.
+Pop-out windows keep the theme's own frosted panels; the plugin only handles the main window.
 
-It only ever touches the main window. Pop-out windows keep the theme's CSS glass and do not get a native material.
+## What it doesn't do
 
-## What it does not do
+- **No network access at all.** No requests, no remote resources, no usage data sent anywhere.
+- **Doesn't change Windows settings.** Your system theme, transparency preference and power settings are left alone. It asks for a material on one window and does nothing else.
+- **Isn't Apple's Liquid Glass.** Acrylic is Windows' own material. Nothing refracts or moves.
+- **Can't restore a material it didn't set.** Electron offers no way to read the current one, so if another plugin had set something else, disabling this one returns your window to the Windows default rather than to that plugin's choice.
 
-- **No network access. None.** The plugin makes no HTTP requests, loads no remote resources, and sends no telemetry or usage data anywhere. Everything it does is local window manipulation.
-- **It does not change Windows settings.** It does not touch your system theme, transparency preference, or power settings. It only asks Electron for a material on one window.
-- **It is not Apple's Liquid Glass.** Acrylic is a Windows compositor material. There is no dynamic refraction.
-- **It cannot read your existing window material.** Electron exposes no getter for it, so on disable the plugin restores the color it recorded before enabling and returns the material to `auto`. If another plugin had set a different material beforehand, that specific material is not restored.
+For that last reason, don't run it alongside another Mica or Acrylic window plugin.
 
-Do not run this alongside another Mica or Acrylic window plugin — they will fight over the same window property.
+## If something looks wrong
 
-### Source
+**Nothing happens and there's no message.** Either the theme isn't active, or your Windows is older than 11 22H2. The plugin stays silent in both cases by design.
 
-`main.js` is a single file of 115 lines with no dependencies beyond Obsidian's own Electron bridge (`obsidian`, `os`, and `@electron/remote` or `electron`). It is not minified or obfuscated. You can read the whole thing before enabling it.
+**It says the material is unavailable.** Your Obsidian installer is too old to expose the API. Updating Obsidian usually fixes it; the theme's own frosted panels keep working meanwhile.
 
-## Troubleshooting
-
-**Nothing happens, no message.** The theme is probably not active, or you are on Windows 10 or an older Windows 11 build. The plugin stays silent in those cases by design.
-
-**A notice says the material is unavailable.** Your Obsidian installer does not expose Electron's window material API. Updating Obsidian usually fixes it. The theme's CSS glass keeps working in the meantime.
-
-**The window is opaque even though the plugin is active.** Windows decides whether to honor Acrylic. Check **Settings → Accessibility → Visual effects → Transparency effects** is on. Power saving, Remote Desktop, and some graphics driver fallbacks also force an opaque window.
+**The plugin is on but the window is still opaque.** Windows decides whether to honour Acrylic. Check **Settings → Accessibility → Visual effects → Transparency effects** is on — power saving, Remote Desktop and some graphics drivers also force it off.
 
 **It stopped working after I switched themes and back.** Run **AbsolutelyGlass Acrylic: Reapply Acrylic backdrop** from the command palette.
 
-**You want it off.** Disable the plugin, or switch to any other theme. The window returns to its original background color.
+**Turning it off.** Disable the plugin, or switch to any other theme. Your window goes back to how it was.
 
 ## Credits
 
 Made for [AbsolutelyGlass](https://github.com/dingye0604/AbsolutelyGlass), which is built on [AbsolutelyBaseline](https://github.com/dingye0604/AbsolutelyBaseline) and [Baseline](https://github.com/aaaaalexis/obsidian-baseline) by aaaa​alexis.
 
-This is an independent, community-made plugin. It is **not affiliated with, sponsored by, or endorsed by Anthropic**. "Claude" is a trademark of Anthropic PBC, referenced here only to describe the theme this plugin accompanies.
+An independent community plugin. It is **not affiliated with, sponsored by, or endorsed by Anthropic**. "Claude" is a trademark of Anthropic PBC, referenced here only to describe the theme this plugin accompanies.
 
 ## License
 

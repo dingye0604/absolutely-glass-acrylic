@@ -2,73 +2,58 @@
 
 [English](./README.md) | **中文**
 
-[AbsolutelyGlass](https://github.com/dingye0604/AbsolutelyGlass) 主题的可选配套插件。它向 Electron 申请原生 Windows Acrylic 材质，让真实桌面透过窗口，取代主题自己模拟的 CSS 玻璃。
+让 [AbsolutelyGlass](https://github.com/dingye0604/AbsolutelyGlass) 主题把真实桌面透出来，用的是 Windows 11 自带的 Acrylic 材质——开始菜单背后那种磨砂效果。
 
-不装这个插件，主题也照常工作——只是它在自己的背景上画磨砂面板。装了这个插件，桌面本身才成为背景。
+主题本身模糊的是自己的背景。这个插件把它换成你窗口背后真正的桌面。
 
-## 系统要求
+## 装之前先确认
 
-- **Windows 11 22H2（build 22621）或更高。** 插件会检查系统版本，低于此版本不会激活。
-- **Obsidian 1.5.0 或更高**，且安装程序提供 `BrowserWindow.setBackgroundMaterial`。若安装程序的 Electron 版本较早，插件会给出提示并保持不动作。
-- **已启用 AbsolutelyGlass 主题。** 插件检测主题的标记变量，主题未激活时自动停用。
+- **Windows 11 22H2（build 22621）或更高。** 低于这个版本的系统上，插件会安静地什么都不做。
+- **已启用 AbsolutelyGlass 主题。** 主题没激活时插件不动作。
+- **Obsidian 1.5.0 或更高**，且安装程序较新。
 
-仅桌面端。插件标记为 `isDesktopOnly`，在 macOS、Linux、移动端不产生任何行为。
+仅桌面端——macOS、Linux 和移动端上它不产生任何行为。
 
 ## 安装
 
-### 从社区插件库
+**在 Obsidian 里装**——设置 → 第三方插件 → 浏览，搜索 **AbsolutelyGlass Acrylic**，点「安装」再「启用」。
 
-1. **设置 → 第三方插件 → 浏览**
-2. 搜索 **AbsolutelyGlass Acrylic**
-3. **安装**，然后**启用**
+**手动装**——从[最新 release](https://github.com/dingye0604/absolutely-glass-acrylic/releases/latest) 下载 `main.js` 和 `manifest.json`，放进 `<你的库>/.obsidian/plugins/absolutely-glass-acrylic/`，重启 Obsidian，然后在设置 → 第三方插件里启用。
 
-### 手动安装
-
-1. 从 [最新 release](https://github.com/dingye0604/absolutely-glass-acrylic/releases/latest) 下载 `main.js` 和 `manifest.json`
-2. 在 `<你的库>/.obsidian/plugins/` 下新建文件夹 `absolutely-glass-acrylic`
-3. 把两个文件放进去
-4. 重启 Obsidian，在 **设置 → 第三方插件** 中启用 **AbsolutelyGlass Acrylic**
-
-无需任何配置，插件会自己识别主题。
+不需要任何配置，插件会自己识别主题。
 
 ## 它做什么
 
-在当前窗口上设置两个属性——完全透明的背景色和 `acrylic` 材质——然后给文档 body 添加 `ca-native-glass` 类。主题响应该类，把自己的表面变透明，于是你看到的就是原生材质。
+它把一个窗口的背景设为透明，并向 Windows 申请 Acrylic 材质。切换到其他主题、开启主题的不透明模式、或在 Windows 辅助功能里关掉透明效果时，它会原样恢复。
 
-以下情况它会撤销全部改动：切换到其他主题、开启主题的不透明模式、系统启用「减少透明效果」辅助功能、或插件被卸载。
-
-它只处理主窗口。弹出窗口保留主题的 CSS 玻璃效果，不获得原生材质。
+弹出窗口保留主题自带的磨砂面板，插件只管主窗口。
 
 ## 它不做什么
 
-- **不访问网络。完全没有。** 插件不发出任何 HTTP 请求，不加载远程资源，不发送遥测或使用数据。它做的全部事情都是本地的窗口操作。
-- **不修改 Windows 设置。** 不碰系统主题、透明效果偏好或电源设置，只是向 Electron 申请某个窗口的材质。
-- **不是 Apple 的 Liquid Glass。** Acrylic 是 Windows 合成器提供的材质，不含动态折射。
-- **无法读取你现有的窗口材质。** Electron 没有提供对应的 getter。因此停用时，插件恢复它启用前记录的颜色，并把材质设回 `auto`。如果此前有别的插件设置过其他材质，那个材质不会被恢复。
+- **完全不访问网络。** 不发请求，不加载远程资源，不向任何地方发送使用数据。
+- **不修改 Windows 设置。** 系统主题、透明效果偏好、电源设置一概不碰，只是给一个窗口申请材质。
+- **不是 Apple 的 Liquid Glass。** Acrylic 是 Windows 自带的材质，没有折射，也不会流动。
+- **无法恢复不是它设置的材质。** Electron 没有提供读取当前材质的接口，所以如果之前有别的插件设过其他材质，停用本插件会把窗口恢复到 Windows 默认值，而不是那个插件设的值。
 
-不要与其他 Mica/Acrylic 窗口插件同时启用——它们会争抢同一个窗口属性。
+正因为最后一条，不要和其他 Mica 或 Acrylic 窗口插件同时启用。
 
-### 源码
+## 遇到问题
 
-`main.js` 是单文件、115 行，除 Obsidian 自带的 Electron 桥（`obsidian`、`os`，以及 `@electron/remote` 或 `electron`）外无任何依赖。未压缩、未混淆。启用前你可以完整读一遍。
+**什么都没发生，也没有提示。** 要么主题没激活，要么系统低于 Windows 11 22H2。这两种情况下插件都按设计保持静默。
 
-## 常见问题
+**提示材质不可用。** 你的 Obsidian 安装程序太旧，没有提供该接口。更新 Obsidian 通常能解决；期间主题自带的磨砂面板照常可用。
 
-**什么都没发生，也没有提示。** 多半是主题未激活，或系统低于 Windows 11 22H2。这些情况下插件按设计保持静默。
+**插件开着但窗口仍是实色。** 是否启用 Acrylic 由 Windows 决定。检查 **设置 → 辅助功能 → 视觉效果 → 透明效果** 是否打开——节能模式、远程桌面、部分显卡驱动也会让它失效。
 
-**提示材质不可用。** 你的 Obsidian 安装程序没有提供 Electron 的窗口材质接口，更新 Obsidian 通常可解决。期间主题的 CSS 玻璃效果不受影响。
+**切换主题再切回来之后失效了。** 在命令面板运行 **AbsolutelyGlass Acrylic: Reapply Acrylic backdrop**。
 
-**插件已启用但窗口仍是实色。** 是否真正启用 Acrylic 由 Windows 决定。检查 **设置 → 辅助功能 → 视觉效果 → 透明效果** 是否已打开。节能模式、远程桌面、部分显卡驱动回退同样会强制窗口变成实色。
-
-**切换主题再切回来之后失效了。** 使用命令面板的 **AbsolutelyGlass Acrylic: 重新应用 Acrylic 磨砂背景**。
-
-**想要关掉。** 停用插件，或切换到任意其他主题，窗口会恢复到原背景色。
+**想关掉。** 停用插件，或切换到任意其他主题，窗口会恢复原状。
 
 ## 致谢
 
 为 [AbsolutelyGlass](https://github.com/dingye0604/AbsolutelyGlass) 而做，该主题建立在 [AbsolutelyBaseline](https://github.com/dingye0604/AbsolutelyBaseline) 与 aaaa​alexis 的 [Baseline](https://github.com/aaaaalexis/obsidian-baseline) 之上。
 
-这是独立的社区插件，**与 Anthropic 无隶属、赞助或背书关系**。「Claude」是 Anthropic PBC 的商标，此处仅用于描述本插件所配套的主题。
+独立的社区插件，**与 Anthropic 无隶属、赞助或背书关系**。「Claude」是 Anthropic PBC 的商标，此处仅用于描述本插件所配套的主题。
 
 ## 许可
 
