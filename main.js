@@ -1,9 +1,9 @@
-/* Local CLaudeApple companion. No dependencies beyond Obsidian's Electron bridge.
+/* Local AbsolutelyGlass companion. No dependencies beyond Obsidian's Electron bridge.
  * Only manages the main window. Never changes global nativeTheme or system settings.
  */
 const { Plugin, Notice } = require("obsidian");
 
-module.exports = class CLaudeAppleGlass extends Plugin {
+module.exports = class AbsolutelyGlassAcrylic extends Plugin {
   onload() {
     this.stopped = false;
     this.active = false;
@@ -89,7 +89,7 @@ module.exports = class CLaudeAppleGlass extends Plugin {
       this.active = false;
       this.failed = true;
       this.clearMarker();
-      new Notice(`CLaudeApple：原生磨砂未启用，已保留主题内玻璃效果。${error.message}`, 9000);
+      new Notice(`AbsolutelyGlass：原生磨砂未启用，已保留主题内玻璃效果。${error.message}`, 9000);
     }
   }
 

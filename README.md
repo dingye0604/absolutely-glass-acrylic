@@ -1,8 +1,8 @@
-# CLaudeApple Glass
+# AbsolutelyGlass Acrylic
 
 **English** | [中文](./README.zh-CN.md)
 
-An optional companion plugin for the [CLaudeApple](https://github.com/dingye0604/CLaudeApple) Obsidian theme. It asks Electron for a native Windows Acrylic backdrop so your real desktop shows through the window, instead of the theme's simulated CSS glass.
+An optional companion plugin for the [AbsolutelyGlass](https://github.com/dingye0604/AbsolutelyGlass) Obsidian theme. It asks Electron for a native Windows Acrylic backdrop so your real desktop shows through the window, instead of the theme's simulated CSS glass.
 
 Without this plugin the theme still works everywhere — it just draws its own frosted panels over its own background. This plugin is what makes the desktop itself the backdrop.
 
@@ -10,7 +10,7 @@ Without this plugin the theme still works everywhere — it just draws its own f
 
 - **Windows 11 22H2 (build 22621) or newer.** The plugin checks the OS build and stays inactive on anything older.
 - **Obsidian 1.5.0 or newer**, installed with an Electron runtime that exposes `BrowserWindow.setBackgroundMaterial`. If your installer predates that API, the plugin tells you and does nothing.
-- **The CLaudeApple theme**, enabled. The plugin looks for the theme's marker variable and disables itself when the theme is not active.
+- **The AbsolutelyGlass theme**, enabled. The plugin looks for the theme's marker variable and disables itself when the theme is not active.
 
 Desktop only. The plugin is `isDesktopOnly`, and it does nothing on macOS, Linux, or mobile.
 
@@ -19,15 +19,15 @@ Desktop only. The plugin is `isDesktopOnly`, and it does nothing on macOS, Linux
 ### From the community plugin browser
 
 1. **Settings → Community plugins → Browse**
-2. Search for **CLaudeApple Glass**
+2. Search for **AbsolutelyGlass Acrylic**
 3. **Install**, then **Enable**
 
 ### Manually
 
-1. Download `main.js` and `manifest.json` from the [latest release](https://github.com/dingye0604/claudeapple-glass/releases/latest)
-2. Create a folder named `claudeapple-glass` inside `<your-vault>/.obsidian/plugins/`
+1. Download `main.js` and `manifest.json` from the [latest release](https://github.com/dingye0604/absolutely-glass-acrylic/releases/latest)
+2. Create a folder named `absolutely-glass-acrylic` inside `<your-vault>/.obsidian/plugins/`
 3. Put both files in that folder
-4. Reload Obsidian, then enable **CLaudeApple Glass** in **Settings → Community plugins**
+4. Reload Obsidian, then enable **AbsolutelyGlass Acrylic** in **Settings → Community plugins**
 
 Nothing to configure. The plugin finds the theme on its own.
 
@@ -60,13 +60,13 @@ Do not run this alongside another Mica or Acrylic window plugin — they will fi
 
 **The window is opaque even though the plugin is active.** Windows decides whether to honor Acrylic. Check **Settings → Accessibility → Visual effects → Transparency effects** is on. Power saving, Remote Desktop, and some graphics driver fallbacks also force an opaque window.
 
-**It stopped working after I switched themes and back.** Run **CLaudeApple Glass: Reapply Acrylic backdrop** from the command palette.
+**It stopped working after I switched themes and back.** Run **AbsolutelyGlass Acrylic: Reapply Acrylic backdrop** from the command palette.
 
 **You want it off.** Disable the plugin, or switch to any other theme. The window returns to its original background color.
 
 ## Credits
 
-Made for [CLaudeApple](https://github.com/dingye0604/CLaudeApple), which is built on [ClaudeBaseline](https://github.com/dingye0604/ClaudeBaseline) and [Baseline](https://github.com/aaaaalexis/obsidian-baseline) by aaaa​alexis.
+Made for [AbsolutelyGlass](https://github.com/dingye0604/AbsolutelyGlass), which is built on [AbsolutelyBaseline](https://github.com/dingye0604/AbsolutelyBaseline) and [Baseline](https://github.com/aaaaalexis/obsidian-baseline) by aaaa​alexis.
 
 This is an independent, community-made plugin. It is **not affiliated with, sponsored by, or endorsed by Anthropic**. "Claude" is a trademark of Anthropic PBC, referenced here only to describe the theme this plugin accompanies.
 
