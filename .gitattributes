@@ -1,0 +1,3 @@
+# Keep the shipped bytes identical to what was tested. No end-of-line
+# translation on checkout.
+* -text
