@@ -1,8 +1,8 @@
-# CLaudeApple Glass
+# AbsolutelyGlass Acrylic
 
 [English](./README.md) | **中文**
 
-[CLaudeApple](https://github.com/dingye0604/CLaudeApple) 主题的可选配套插件。它向 Electron 申请原生 Windows Acrylic 材质，让真实桌面透过窗口，取代主题自己模拟的 CSS 玻璃。
+[AbsolutelyGlass](https://github.com/dingye0604/AbsolutelyGlass) 主题的可选配套插件。它向 Electron 申请原生 Windows Acrylic 材质，让真实桌面透过窗口，取代主题自己模拟的 CSS 玻璃。
 
 不装这个插件，主题也照常工作——只是它在自己的背景上画磨砂面板。装了这个插件，桌面本身才成为背景。
 
@@ -10,7 +10,7 @@
 
 - **Windows 11 22H2（build 22621）或更高。** 插件会检查系统版本，低于此版本不会激活。
 - **Obsidian 1.5.0 或更高**，且安装程序提供 `BrowserWindow.setBackgroundMaterial`。若安装程序的 Electron 版本较早，插件会给出提示并保持不动作。
-- **已启用 CLaudeApple 主题。** 插件检测主题的标记变量，主题未激活时自动停用。
+- **已启用 AbsolutelyGlass 主题。** 插件检测主题的标记变量，主题未激活时自动停用。
 
 仅桌面端。插件标记为 `isDesktopOnly`，在 macOS、Linux、移动端不产生任何行为。
 
@@ -19,15 +19,15 @@
 ### 从社区插件库
 
 1. **设置 → 第三方插件 → 浏览**
-2. 搜索 **CLaudeApple Glass**
+2. 搜索 **AbsolutelyGlass Acrylic**
 3. **安装**，然后**启用**
 
 ### 手动安装
 
-1. 从 [最新 release](https://github.com/dingye0604/claudeapple-glass/releases/latest) 下载 `main.js` 和 `manifest.json`
-2. 在 `<你的库>/.obsidian/plugins/` 下新建文件夹 `claudeapple-glass`
+1. 从 [最新 release](https://github.com/dingye0604/absolutely-glass-acrylic/releases/latest) 下载 `main.js` 和 `manifest.json`
+2. 在 `<你的库>/.obsidian/plugins/` 下新建文件夹 `absolutely-glass-acrylic`
 3. 把两个文件放进去
-4. 重启 Obsidian，在 **设置 → 第三方插件** 中启用 **CLaudeApple Glass**
+4. 重启 Obsidian，在 **设置 → 第三方插件** 中启用 **AbsolutelyGlass Acrylic**
 
 无需任何配置，插件会自己识别主题。
 
@@ -60,13 +60,13 @@
 
 **插件已启用但窗口仍是实色。** 是否真正启用 Acrylic 由 Windows 决定。检查 **设置 → 辅助功能 → 视觉效果 → 透明效果** 是否已打开。节能模式、远程桌面、部分显卡驱动回退同样会强制窗口变成实色。
 
-**切换主题再切回来之后失效了。** 使用命令面板的 **CLaudeApple Glass: 重新应用 Acrylic 磨砂背景**。
+**切换主题再切回来之后失效了。** 使用命令面板的 **AbsolutelyGlass Acrylic: 重新应用 Acrylic 磨砂背景**。
 
 **想要关掉。** 停用插件，或切换到任意其他主题，窗口会恢复到原背景色。
 
 ## 致谢
 
-为 [CLaudeApple](https://github.com/dingye0604/CLaudeApple) 而做，该主题建立在 [ClaudeBaseline](https://github.com/dingye0604/ClaudeBaseline) 与 aaaa​alexis 的 [Baseline](https://github.com/aaaaalexis/obsidian-baseline) 之上。
+为 [AbsolutelyGlass](https://github.com/dingye0604/AbsolutelyGlass) 而做，该主题建立在 [AbsolutelyBaseline](https://github.com/dingye0604/AbsolutelyBaseline) 与 aaaa​alexis 的 [Baseline](https://github.com/aaaaalexis/obsidian-baseline) 之上。
 
 这是独立的社区插件，**与 Anthropic 无隶属、赞助或背书关系**。「Claude」是 Anthropic PBC 的商标，此处仅用于描述本插件所配套的主题。
 
