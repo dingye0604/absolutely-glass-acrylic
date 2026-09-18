@@ -50,7 +50,7 @@
 
 ### 源码
 
-`main.js` 是单文件、约 120 行，除 Obsidian 自带的 Electron 桥（`obsidian`、`os`，以及 `@electron/remote` 或 `electron`）外无任何依赖。未压缩、未混淆。启用前你可以完整读一遍。
+`main.js` 是单文件、115 行，除 Obsidian 自带的 Electron 桥（`obsidian`、`os`，以及 `@electron/remote` 或 `electron`）外无任何依赖。未压缩、未混淆。启用前你可以完整读一遍。
 
 ## 常见问题
 

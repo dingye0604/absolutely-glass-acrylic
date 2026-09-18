@@ -50,7 +50,7 @@ Do not run this alongside another Mica or Acrylic window plugin — they will fi
 
 ### Source
 
-`main.js` is a single file of about 120 lines with no dependencies beyond Obsidian's own Electron bridge (`obsidian`, `os`, and `@electron/remote` or `electron`). It is not minified or obfuscated. You can read the whole thing before enabling it.
+`main.js` is a single file of 115 lines with no dependencies beyond Obsidian's own Electron bridge (`obsidian`, `os`, and `@electron/remote` or `electron`). It is not minified or obfuscated. You can read the whole thing before enabling it.
 
 ## Troubleshooting
 
